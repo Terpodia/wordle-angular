@@ -1,0 +1,5 @@
+<div style="display: flex; gap: 5px">
+  @for (item of iterations; track $index) {
+  <app-letter-card [state]="states[item]" [letter]="letters[item]"> </app-letter-card>
+  }
+</div>

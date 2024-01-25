@@ -1,6 +1,7 @@
 import { NgClass, UpperCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
+import { State } from '../../utils/constants';
 
 @Component({
   selector: 'app-letter-card',
@@ -10,12 +11,7 @@ import { Input } from '@angular/core';
   styleUrl: './letter-card.component.scss',
 })
 export class LetterCardComponent {
-  @Input() state:
-    | 'empty'
-    | 'non-empty'
-    | 'miss-place'
-    | 'not-belong'
-    | 'success' = 'empty';
+  @Input() state: State = 'empty';
 
   readonly letterState = {
     empty: 'empty',
