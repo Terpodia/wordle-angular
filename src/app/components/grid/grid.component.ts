@@ -42,7 +42,7 @@ export class GridComponent implements OnInit, AfterViewInit {
 
   private listenerEvents(): void {
     if (!isPlatformBrowser(this.platformId)) return;
-    fromEvent<KeyboardEvent>(document, 'keyup').subscribe((event) => {
+    fromEvent<KeyboardEvent>(document, 'keydown').subscribe((event) => {
       if (event.key === 'Enter') this.gameActions.submitWord();
       else if (event.key === 'Backspace') this.gameActions.deleteLetter();
       else if (this.isAlphabetLetter(event.key))
