@@ -25,4 +25,22 @@ export class RowLetterComponent implements OnInit {
       };
     }
   }
+
+  get(): string {
+    return this.letters.map((letter) => letter.value).join('');
+  }
+
+  put(letter: string): void {
+    this.letters[this.gameState.currentCol] = {
+      value: letter,
+      state: 'non-empty',
+    };
+  }
+
+  delete(): void {
+    this.letters[this.gameState.currentCol - 1] = {
+      value: '',
+      state: 'empty',
+    };
+  }
 }
