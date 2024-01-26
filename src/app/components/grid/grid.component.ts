@@ -1,4 +1,12 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { fromEvent } from 'rxjs';
 import { RowLetterComponent } from '../row-letter/row-letter.component';
@@ -12,7 +20,9 @@ import { GameActionsService } from '../../services/game-actions.service';
   templateUrl: './grid.component.html',
   styleUrl: './grid.component.scss',
 })
-export class GridComponent implements OnInit {
+export class GridComponent implements OnInit, AfterViewInit {
+  @ViewChildren(RowLetterComponent) rows!: QueryList<RowLetterComponent>;
+
   tries: number = 0;
 
   constructor(
@@ -24,6 +34,10 @@ export class GridComponent implements OnInit {
   ngOnInit(): void {
     this.tries = this.gameState.tries;
     this.listenerEvents();
+  }
+
+  ngAfterViewInit(): void {
+    this.gameState.rows = this.rows.toArray();
   }
 
   private listenerEvents(): void {
