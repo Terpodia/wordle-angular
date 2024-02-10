@@ -51,6 +51,6 @@ export class GridComponent implements OnInit, AfterViewInit {
   }
 
   private isAlphabetLetter(key: string): boolean {
-    return /^[a-zA-Z]$/.test(key);
+    return /^[a-zA-Zñ]$/.test(key);
   }
 }

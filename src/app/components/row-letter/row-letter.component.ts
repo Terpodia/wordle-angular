@@ -43,4 +43,31 @@ export class RowLetterComponent implements OnInit {
       state: 'empty',
     };
   }
+
+  changeLettersState(): void {
+    const counter: Record<string, number> = {};
+
+    for (let i = 0; i < this.gameState.secretWord.length; i++) {
+      if(counter[this.gameState.secretWord[i]])
+        counter[this.gameState.secretWord[i]]++;
+      else
+        counter[this.gameState.secretWord[i]] = 1;
+
+      if (this.gameState.secretWord[i] === this.letters[i].value) {
+        this.letters[i].state = 'success';
+        counter[this.gameState.secretWord[i]]--;
+      }
+    }
+
+    for (let i = 0; i < this.gameState.secretWord.length; i++) {
+      if (this.gameState.secretWord[i] === this.letters[i].value) 
+        continue;
+
+      if (counter[this.letters[i].value] && counter[this.letters[i].value] > 0) {
+        counter[this.letters[i].value]--;
+        this.letters[i].state = 'miss-place';
+      }
+      else this.letters[i].state = 'not-belong';
+    }
+  }
 }

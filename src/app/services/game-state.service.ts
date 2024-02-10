@@ -10,7 +10,7 @@ export class GameStateService {
   currentRow: number = 0;
   currentCol: number = 0;
   hasEnded: boolean = false;
-  secretWord: string = 'words';
+  secretWord: string = 'word.';
   rows: RowLetterComponent[] = [];
 
   constructor() {}

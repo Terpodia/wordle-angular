@@ -10,13 +10,17 @@ export class GameActionsService {
   submitWord(): void {
     if (this.gameState.hasEnded) return;
     if (this.gameState.currentCol < this.gameState.wordSize) return;
-    this.gameState.currentCol = 0;
-    this.gameState.currentRow++;
+
     const maxTriesReached = this.gameState.currentRow >= this.gameState.tries;
     const secretWordMatch =
       this.gameState.secretWord ===
       this.gameState.rows[this.gameState.currentRow].get();
       this.gameState.hasEnded = maxTriesReached || secretWordMatch;
+    
+    this.gameState.rows[this.gameState.currentRow].changeLettersState();
+
+    this.gameState.currentCol = 0;
+    this.gameState.currentRow++;
   }
 
   deleteLetter(): void {
