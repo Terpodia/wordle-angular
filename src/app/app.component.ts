@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { map } from 'rxjs';
 import { GridComponent } from './components/grid/grid.component';
 import { HttpClient } from '@angular/common/http';
 import { GameStateService } from './services/game-state.service';
@@ -19,18 +20,23 @@ export class AppComponent implements OnInit {
 
   constructor(
     private readonly httpClient: HttpClient,
-    private gameStateServide: GameStateService
+    private gameState: GameStateService
   ) {}
 
   ngOnInit(): void {
-    this.httpClient.get<string>(API_URL + 'length=5').subscribe((item) => {
-      this.gameStateServide.secretWord = item.toString();
-      this.gameStateServide.secretWord = this.gameStateServide.secretWord
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .toLowerCase();
-
-      console.log(this.gameStateServide.secretWord);
-    });
+    this.httpClient
+      .get<[string]>(API_URL + 'length=5')
+      .pipe(
+        map((item) =>
+          item[0]
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+        )
+      )
+      .subscribe((item) => {
+        this.gameState.secretWord = item;
+        console.log(item);
+      });
   }
 }
