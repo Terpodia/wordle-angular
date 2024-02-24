@@ -5,18 +5,22 @@ import { map } from 'rxjs';
 import { GridComponent } from './components/grid/grid.component';
 import { HttpClient } from '@angular/common/http';
 import { GameStateService } from './services/game-state.service';
+import { BtnKeyboardComponent } from './components/btn-keyboard/btn-keyboard.component';
+import { keyboard } from './constants/keyboard';
 
 const API_URL = 'https://random-word-api.herokuapp.com/word?lang=es&';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, GridComponent],
+  imports: [CommonModule, RouterOutlet, GridComponent, BtnKeyboardComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
   title = 'wordle-angular';
+
+  readonly keyboard = keyboard;
 
   constructor(
     private readonly httpClient: HttpClient,

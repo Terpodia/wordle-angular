@@ -1,1 +1,21 @@
 <app-grid></app-grid>
+
+<div class="keyboard">
+  <div class="row">
+    @for(item of keyboard[0]; track $index) {
+    <app-btn-keyboard [value]="item"> </app-btn-keyboard>
+    }
+  </div>
+
+  <div class="row">
+    @for(item of keyboard[1]; track $index) {
+    <app-btn-keyboard [value]="item"> </app-btn-keyboard>
+    }
+  </div>
+
+  <div class="row">
+    @for(item of keyboard[2]; track $index) {
+    <app-btn-keyboard [value]="item"> </app-btn-keyboard>
+    }
+  </div>
+</div>
