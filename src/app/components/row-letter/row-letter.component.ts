@@ -33,7 +33,7 @@ export class RowLetterComponent implements OnInit {
 
   put(letter: string): void {
     this.letters[this.gameState.currentCol] = {
-      value: letter,
+      value: letter.toLowerCase(),
       state: 'non-empty',
     };
   }
